@@ -29,7 +29,30 @@ public class CommunitiesGraph implements Graph {
 
 	public HashSet<Integer> getUnfriendables(int user) {
 		HashSet<Integer> friends = graphMap.get(user);
-		return friends;
+		HashSet<Integer> unfriendables = new HashSet<Integer>();
+		for(Integer friend : friends){
+			HashSet<Integer> friendsFriends = graphMap.get(friend);
+			friendsFriends.remove(user);
+			if(friendsFriends.isEmpty()){
+				unfriendables.add(friend);
+			}
+			for(Integer friendsFriend :friendsFriends){
+				if(!friends.contains(friendsFriend)){
+					unfriendables.add(friend);
+				}
+			}
+			
+		}
+		return unfriendables;
+	}
+
+
+	private boolean areFriends(Integer user1, Integer user2) {
+		HashSet<Integer> user2Friends = graphMap.get(user2);
+		if(user2Friends.contains(user1)){
+			return true;
+		}
+		return false;
 	}
 
 }

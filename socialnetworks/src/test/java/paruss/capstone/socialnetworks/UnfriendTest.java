@@ -3,7 +3,6 @@ package paruss.capstone.socialnetworks;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashSet;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -33,6 +32,36 @@ public class UnfriendTest
 		for(Integer friend : unfriendables){
 			assertThat(friend.intValue()).isEqualTo(2);
 		}
-			
 	}
+	
+	@Test
+	public void givenHasTwoFriendsWhoAreFriendsIsEmpty(){
+		Graph graph = new CommunitiesGraph();
+		graph.addVertex(1);
+		graph.addVertex(2);
+		graph.addVertex(3);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 1);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(3, 1);
+		HashSet<Integer> unfriendables = graph.getUnfriendables(1);
+		assertThat(unfriendables).isEmpty();
+	}
+	
+	@Test
+	public void givenHasTwoFriendsWhoAreNotFriendsReturnsThoseFriends(){
+		Graph graph = new CommunitiesGraph();
+		graph.addVertex(1);
+		graph.addVertex(2);
+		graph.addVertex(3);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 1);
+		graph.addEdge(1, 3);
+		graph.addEdge(3, 1);
+		HashSet<Integer> unfriendables = graph.getUnfriendables(1);
+		assertThat(unfriendables).contains(3, 2);
+	}
+
 }
