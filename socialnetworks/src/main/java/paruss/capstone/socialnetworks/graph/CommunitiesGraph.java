@@ -1,9 +1,7 @@
 package paruss.capstone.socialnetworks.graph;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 public class CommunitiesGraph implements Graph {
 
@@ -45,14 +43,4 @@ public class CommunitiesGraph implements Graph {
 		}
 		return unfriendables;
 	}
-
-
-	private boolean areFriends(Integer user1, Integer user2) {
-		HashSet<Integer> user2Friends = graphMap.get(user2);
-		if(user2Friends.contains(user1)){
-			return true;
-		}
-		return false;
-	}
-
 }

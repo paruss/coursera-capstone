@@ -2,7 +2,6 @@
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 public interface Graph {
     /* Creates a vertex with the given number. */
